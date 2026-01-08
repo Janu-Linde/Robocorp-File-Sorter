@@ -1,6 +1,8 @@
 from robocorp.tasks import task
 from RPA.FileSystem import FileSystem
 
+# For the sake of time this project currently does not sort file but rather prints the names of the files in the directory.
+
 @task
 def minimal_task():
     read_file_names()
