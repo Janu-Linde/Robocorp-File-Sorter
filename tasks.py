@@ -1,11 +1,10 @@
 from robocorp.tasks import task
 from RPA.FileSystem import FileSystem
 
-# For the sake of time this project currently does not sort file but rather prints the names of the files in the directory.
-
 @task
 def minimal_task():
-    read_file_names()
+    create_folders()
+    move_file_into_folders()
 
 
 def read_file_names():
@@ -15,3 +14,38 @@ def read_file_names():
     for file in fs.list_directories_in_directory(directory):
         name = fs.get_file_name(file)
         print(name)
+
+
+def get_file_extensions():
+    fs = FileSystem()
+    directory = r"C:\Users\janul\Downloads"
+    extensions = []
+
+    for file in fs.list_files_in_directory(directory): 
+        extension = fs.get_file_extension(file)
+        extensions.append(extension)
+
+    return list(dict.fromkeys(extensions))
+
+
+def create_folders():
+    fs = FileSystem()
+    directory = r"C:\Users\janul\Downloads"
+
+    extensions = get_file_extensions()
+
+    for ext in extensions:
+        folder_path = f"{directory}\\{ext}"
+        fs.create_directory(folder_path)
+
+
+def move_file_into_folders():
+    fs = FileSystem()
+    directory = r"C:\Users\janul\Downloads"
+
+    for file in fs.list_files_in_directory(directory):
+        ext = fs.get_file_extension(file)
+        fs.move_file(
+            f"{file}",
+            f"{directory}\\{ext}\\{fs.get_file_name(file)}"
+        )
