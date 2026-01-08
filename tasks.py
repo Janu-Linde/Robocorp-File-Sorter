@@ -7,15 +7,6 @@ def minimal_task():
     move_file_into_folders()
 
 
-def read_file_names():
-    fs = FileSystem()
-    directory = r"C:\Users\janul\Downloads"
-
-    for file in fs.list_directories_in_directory(directory):
-        name = fs.get_file_name(file)
-        print(name)
-
-
 def get_file_extensions():
     fs = FileSystem()
     directory = r"C:\Users\janul\Downloads"
